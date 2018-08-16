@@ -4,7 +4,7 @@ API wrapper for Barter.vg
 
 # STILL VERY WIP - API IS NOT STABLE - DO NOT USE IN PRODUCTION
 
-"You suck" comments belong [here](https://github.com/antigravities/libbarter/issues).
+# [Documentation](https://github.com/antigravities/libbarter/wiki)
 
 # Example
 
