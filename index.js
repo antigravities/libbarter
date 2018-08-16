@@ -9,7 +9,7 @@ module.exports = class Barter {
 
     this._request.defaults({
       "headers": {
-        "User-Agent": "libbarter/0.1.0 (via request) - https://github.com/antigravities/libbarter",
+        "User-Agent": this.toString(),
         "Cookie": myCookie != null ? "login=" + myCookie : ""
       }
     });
@@ -26,6 +26,8 @@ module.exports = class Barter {
     this._Collection = require("./lib/collection.js");
     this._CollectionItem = require("./lib/collectionitem.js");
     this._Item = require("./lib/item.js");
+    this._GlobalOfferCollector = require("./lib/globaloffercollector.js");
+    this._FeedOffer = require("./lib/feedoffer.js");
 
     this._Symbols = require("./lib/symbols.js");
   }
@@ -92,5 +94,14 @@ module.exports = class Barter {
 
   async getItem(item) {
     return await this._getOrCache("item/" + item, async() => await (new this._Item(item, this)).init());
+  }
+
+  getGlobalOfferCollector(pollTime = 30000) {
+    if (this._globalOfferCollector) return this._globalOfferCollector;
+    else return new this._GlobalOfferCollector(pollTime, this);
+  }
+
+  toString() {
+    return "libbarter/0.1.0 (via request) - https://github.com/antigravities/libbarter";
   }
 }
