@@ -1,0 +1,24 @@
+{
+  "name": "libbarter",
+  "version": "0.1.0",
+  "description": "Barter.vg wrapper in Node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antigravities/libbarter.git"
+  },
+  "author": "Alexandra Frock <alexandra@cutie.cafe>",
+  "license": "LGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/antigravities/libbarter/issues"
+  },
+  "homepage": "https://github.com/antigravities/libbarter#readme",
+  "dependencies": {
+    "he": "^1.1.1",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2"
+  }
+}
