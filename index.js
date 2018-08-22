@@ -101,6 +101,23 @@ module.exports = class Barter {
     else return new this._GlobalOfferCollector(pollTime, this);
   }
 
+  async getUserBySteamID(steamid) {
+    return await this._getOrCache("steamid/" + steamid, async() => {
+      let json;
+
+      try {
+        json = JSON.parse(await this._request("https://barter.vg/steam/" + steamid + "/json"));
+      }
+      catch (e) {
+        return null;
+      }
+
+      if (!json.hexid) return null;
+
+      return (new this._User(json.hexid, this)).init();
+    });
+  }
+
   toString() {
     return "libbarter/0.1.0 (via request) - https://github.com/antigravities/libbarter";
   }
