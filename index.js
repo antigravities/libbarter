@@ -6,14 +6,6 @@ module.exports = class Barter {
     this._cached = {};
 
     this._request = require("request-promise");
-
-    this._request.defaults({
-      "headers": {
-        "User-Agent": this.toString(),
-        "Cookie": myCookie != null ? "login=" + myCookie : ""
-      }
-    });
-
     this._he = require("he");
 
     this._Offers = require("./lib/offers.js");
@@ -32,10 +24,25 @@ module.exports = class Barter {
     this._Symbols = require("./lib/symbols.js");
   }
 
-  async _doRequest(address) {
+  async _doRequest(address, form = null) {
     try {
-      let response = await this._request(address);
-      return JSON.parse(response);
+      let response;
+
+      let opts = {
+        url: address,
+        "headers": {
+          "User-Agent": this.toString(),
+          "Cookie": "login=" + this.myCookie
+        }
+      };
+
+      if( form == null ) response = await this._request(opts);
+      else {
+        opts.form = form;
+        response = this._request.post(opts);
+      }
+
+      return typeof response == "string" ? JSON.parse(response) : response;
     }
     catch (e) {
       throw e;
@@ -106,7 +113,7 @@ module.exports = class Barter {
       let json;
 
       try {
-        json = JSON.parse(await this._request("https://barter.vg/steam/" + steamid + "/json"));
+        json = JSON.parse(await this._doRequest("https://barter.vg/steam/" + steamid + "/json"));
       }
       catch (e) {
         return null;
