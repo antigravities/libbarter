@@ -82,16 +82,16 @@ module.exports = class Barter {
 
   async getUser(user = null) {
     user = this._parseAnonymous(user, "user profile");
-    return await this._getOrCache("user/" + user, async() => await (new this._User(user, this)).init());
+    return await this._getOrCache("user/" + user, async () => await (new this._User(user, this)).init());
   }
 
   async getOffers(user = null) {
     user = this._parseAnonymous(user, "offers");
-    return await this._getOrCache("offers/" + user, async() => await (new this._Offers(user, this)).init());
+    return await this._getOrCache("offers/" + user, async () => await (new this._Offers(user, this)).init());
   }
 
   async getOffer(offer) {
-    return await this._getOrCache("offer/" + offer, async() => await (new this._Offer(offer, this)).init());
+    return await this._getOrCache("offer/" + offer, async () => await (new this._Offer(offer, this)).init());
   }
 
   async getCollection(user = null, type = "t") {
@@ -100,7 +100,7 @@ module.exports = class Barter {
   }
 
   async getItem(item) {
-    return await this._getOrCache("item/" + item, async() => await (new this._Item(item, this)).init());
+    return await this._getOrCache("item/" + item, async () => await (new this._Item(item, this)).init());
   }
 
   getGlobalOfferCollector(pollTime = 30000) {
@@ -109,11 +109,11 @@ module.exports = class Barter {
   }
 
   async getUserBySteamID(steamid) {
-    return await this._getOrCache("steamid/" + steamid, async() => {
+    return await this._getOrCache("steamid/" + steamid, async () => {
       let json;
 
       try {
-        json = JSON.parse(await this._doRequest("https://barter.vg/steam/" + steamid + "/json"));
+        json = await this._doRequest("https://barter.vg/steam/" + steamid + "/json");
       }
       catch (e) {
         return null;
