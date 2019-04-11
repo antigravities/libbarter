@@ -2,8 +2,6 @@
 
 API wrapper for Barter.vg
 
-# STILL VERY WIP - API IS NOT STABLE - DO NOT USE IN PRODUCTION
-
 # [Documentation](https://github.com/antigravities/libbarter/wiki)
 
 # Example
