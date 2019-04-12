@@ -2,6 +2,8 @@
 
 API wrapper for Barter.vg
 
+![](https://nodei.co/npm/libbarter.png)
+
 # [Documentation](https://github.com/antigravities/libbarter/wiki)
 
 # Example
@@ -16,9 +18,23 @@ const Barter = require("./index.js");
   let firstOffer = await offers[Object.keys(offers)[0]].getFullOffer();
   let firstItem = firstOffer.items.to[0];
   let firstFullItem = await firstItem.getFullItem();
+  
   console.log(firstFullItem);
 })();
 ```
+
+# Tests
+
+libbarter comes with a test suite powered by [jest](https://jestjs.io) that evaluates many features.
+
+```
+git clone https://github.com/antigravities/libbarter
+cd libbarter
+npm i --dev
+npm test
+```
+
+Grab a cup of tea, tests may take up to 2 minutes to complete as `GlobalOfferCollector` is covered.
 
 # License
 

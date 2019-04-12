@@ -60,3 +60,43 @@ test("getUserBySteamID() returns a valid User", () => {
         expect(user.id).toBe("3ede");
     });
 });
+
+test("getFirehose() returns a valid Firehose that emits FirehoseItems", () => {
+    return new Promise((resolve, reject) => {
+        let fh = Barter.getFirehose("wishlists");
+
+        expect(fh instanceof Barter._Firehose).toBe(true);
+        fh.once("item", resolve);
+    }).then(item => {
+        expect(item instanceof Barter._FirehoseItem).toBe(true);
+        expect(item.user instanceof Barter._LimitedUser).toBe(true);
+    });
+});
+
+test("Firehose respects cache", () => {
+    let items;
+
+    return new Promise((resolve, reject) => {
+        let fh = Barter.getFirehose("wishlists");
+
+        fh.once("items", i => {
+            items = i;
+
+            fh.destroy();
+
+            fh = Barter.getFirehose("wishlists", items);
+
+            let ok = true;
+
+            fh.on("item", item => {
+                if( items.indexOf(item.lineItem) > -1 ) ok = false;
+            });
+
+            fh.on("items", () => {
+                resolve(ok);
+            });
+        });
+    }).then(res => {
+        expect(res).toBe(true);
+    });
+});

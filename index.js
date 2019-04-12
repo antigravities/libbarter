@@ -4,6 +4,7 @@ module.exports = class Barter {
     this.myCookie = myCookie;
 
     this._cached = {};
+    this._firehose = {};
 
     this._request = require("request-promise");
     this._he = require("he");
@@ -20,6 +21,8 @@ module.exports = class Barter {
     this._Item = require("./lib/item.js");
     this._GlobalOfferCollector = require("./lib/globaloffercollector.js");
     this._FeedOffer = require("./lib/feedoffer.js");
+    this._Firehose = require("./lib/firehose.js");
+    this._FirehoseItem = require("./lib/firehoseitem.js");
 
     this._Symbols = require("./lib/symbols.js");
   }
@@ -104,8 +107,11 @@ module.exports = class Barter {
   }
 
   getGlobalOfferCollector(pollTime = 30000) {
-    if (this._globalOfferCollector) return this._globalOfferCollector;
-    else return new this._GlobalOfferCollector(pollTime, this);
+    return new this._GlobalOfferCollector(pollTime, this);
+  }
+
+  getFirehose(hose, cache = [], pollTime = 300000){
+    return new this._Firehose(hose, cache, pollTime, this);
   }
 
   async getUserBySteamID(steamid) {
