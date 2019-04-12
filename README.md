@@ -4,6 +4,8 @@ API wrapper for Barter.vg
 
 ![](https://nodei.co/npm/libbarter.png)
 
+[![Build Status](https://travis-ci.org/antigravities/libbarter.svg?branch=master)](https://travis-ci.org/antigravities/libbarter) [![codecov](https://codecov.io/gh/antigravities/libbarter/branch/master/graph/badge.svg)](https://codecov.io/gh/antigravities/libbarter)
+
 # [Documentation](https://github.com/antigravities/libbarter/wiki)
 
 # Example
