@@ -106,8 +106,8 @@ module.exports = class Barter {
     return await this._getOrCache("item/" + item, async () => await (new this._Item(item, this)).init());
   }
 
-  getGlobalOfferCollector(pollTime = 30000) {
-    return new this._GlobalOfferCollector(pollTime, this);
+  getGlobalOfferCollector(pollTime = 30000, cache = []) {
+    return new this._GlobalOfferCollector(pollTime, cache, this);
   }
 
   getFirehose(hose, cache = [], pollTime = 300000){
